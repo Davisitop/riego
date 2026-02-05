@@ -1,8 +1,10 @@
-
-
 <!-- CONTENEDOR PADRE (SIN FONDO) -->
 <div class="relative min-h-screen flex flex-col p-4 w-72 bg-white shadow-lg">
   <button class="bg-green-600 text-white py-2 rounded-lg font-semibold shadow hover:bg-green-700 w-full mb-4" (click)="openCreateConfigDialog()">Agregar planta</button>
+
+  <!-- Botones de Reporte y Acerca de -->
+  <button class="bg-blue-600 text-white py-2 rounded-lg font-semibold shadow hover:bg-blue-700 w-full mb-2" (click)="generateReport()">Generar Reporte</button>
+  <button class="bg-gray-500 text-white py-2 rounded-lg font-semibold shadow hover:bg-gray-600 w-full mb-4" (click)="openAboutModal()">Acerca del Proyecto</button>
 
   <div *ngIf="configs && configs.length" class="w-full">
     <h3 class="text-green-700 text-lg font-bold mb-2">Mis plantas</h3>
@@ -29,7 +31,7 @@
           <ng-template #showTemp>{{ config.temperatureThreshold }} °C</ng-template>
         </div>
         <div class="mb-2">
-          <span class="font-semibold">Humedad:</span>
+          <span classn="font-semibold">Humedad:</span>
           <ng-container *ngIf="editingConfigId === config._id; else showHum">
             <input class="border rounded px-1 py-0.5 ml-1 w-16" type="number" [(ngModel)]="editedConfig.humidityThreshold" /> %
           </ng-container>
