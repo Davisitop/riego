@@ -1,0 +1,28 @@
+<div class="min-h-screen flex flex-col bg-[#f1f8e9]">
+  <!-- Header -->
+  <app-header class="fixed top-0 left-0 w-full z-20 shadow-lg" style="height:72px;"
+    [user]="user" (signIn)="openAuth('signin')" (register)="openAuth('register')" (logout)="logout()">
+  </app-header>
+  <div class="flex flex-1 pt-[72px]">
+    <!-- Sidebar -->
+    <div class="relative">
+      <app-sidebar *ngIf="sidebarOpen"
+        (sidebarClose)="closeSidebar()"
+        [configs]="configs"
+        [selectedConfigId]="selectedConfigId"
+        (selectedConfigChange)="onSelectedConfigChange($event)"
+        (configSaved)="onConfigSaved($event)"
+        class="w-80 min-w-[320px] h-full bg-green-50 shadow-lg z-10"></app-sidebar>
+    </div>
+    <main class="flex-1 flex flex-col items-center justify-center px-8 py-10 relative">
+      <div class="absolute top-4 right-8 bg-white/80 rounded-lg px-4 py-2 shadow text-green-700 font-semibold text-sm">
+        {{ currentDate | date:'MMM d, y - h:mm:ss a' }}
+      </div>
+      <app-dashboard [config]="selectedConfig"></app-dashboard>
+    </main>
+  </div>
+  <!-- Footer -->
+  <app-footer class="w-full z-20 shadow-lg"></app-footer>
+  <!-- Auth Modal -->
+  <app-auth *ngIf="authModal" [isSignIn]="authModal === 'signin'" (close)="closeAuth()" (authSuccess)="onAuthSuccess($event)"></app-auth>
+</div>

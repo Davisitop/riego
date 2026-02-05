@@ -1,0 +1,9 @@
+/* Tailwind handles layout and styling */
+
+main {
+  @apply bg-white bg-opacity-85 rounded-3xl shadow-md transition-shadow duration-300;
+}
+
+main:hover {
+  @apply shadow-lg;
+}

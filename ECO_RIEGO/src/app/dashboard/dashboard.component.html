@@ -1,0 +1,47 @@
+<section class="w-full flex flex-col items-center">
+  <div class="w-full max-w-5xl animate-fade-up">
+    <h2 class="text-2xl md:text-3xl font-semibold text-gray-900">TU PLANTA</h2>
+    <p class="mt-2 text-sm text-gray-500">Resumen general del estado y métricas actuales.</p>
+  </div>
+
+  <div class="mt-10 w-full max-w-5xl grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-12 items-start">
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-8">
+      <div class="flex flex-col items-center">
+        <app-gauge
+          [label]="'Humedad'"
+          [value]="humedad"
+          [unit]="'%'"
+          [color]="'green'"
+          class="w-48 h-48"
+        ></app-gauge>
+        <span class="mt-2 text-green-700 font-semibold">Humedad</span>
+      </div>
+      <div class="flex flex-col items-center">
+        <app-gauge
+          [label]="'Temperatura'"
+          [value]="temperatura"
+          [unit]="'°C'"
+          [color]="'yellow'"
+          class="w-48 h-48"
+        ></app-gauge>
+        <span class="mt-2 text-yellow-700 font-semibold">Temperatura</span>
+      </div>
+    </div>
+
+    <div class="flex flex-col items-center lg:items-start gap-4 lg:mt-4 animate-fade-up">
+      <span class="text-[13px] font-semibold text-gray-700 tracking-[0.25em]">ESTADO PROGRAMA</span>
+      <label class="relative inline-flex items-center cursor-pointer">
+        <input type="checkbox" class="sr-only peer" [(ngModel)]="estadoPrograma">
+        <div class="w-12 h-6 bg-green-200 rounded-full peer-checked:bg-green-500 transition"></div>
+        <span class="absolute left-0.5 top-0.5 w-5 h-5 bg-white rounded-full transition peer-checked:translate-x-6"></span>
+      </label>
+    </div>
+  </div>
+
+  <div class="mt-16 flex flex-col items-center animate-fade-up">
+    <div class="flex flex-col items-center mt-8">
+      <span class="text-6xl">{{ ilustracion }}</span>
+      <span class="text-xl font-bold mt-2 text-green-700">{{ estadoMensaje }}</span>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,13 @@
+div {
+  /* Tailwind classes are used in HTML, but you can add custom styles here if needed */
+  background: none;
+}
+
+.fixed {
+  backdrop-filter: blur(2px);
+}
+
+.bg-white {
+  box-shadow: 0 4px 32px rgba(76, 175, 80, 0.18);
+  border-radius: 1.5rem;
+}

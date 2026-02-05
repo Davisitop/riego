@@ -1,0 +1,47 @@
+
+
+<!-- CONTENEDOR PADRE (SIN FONDO) -->
+<div class="relative min-h-screen flex flex-col p-4 w-72 bg-white shadow-lg">
+  <button class="bg-green-600 text-white py-2 rounded-lg font-semibold shadow hover:bg-green-700 w-full mb-4" (click)="openCreateConfigDialog()">Agregar planta</button>
+
+  <div *ngIf="configs && configs.length" class="w-full">
+    <h3 class="text-green-700 text-lg font-bold mb-2">Mis plantas</h3>
+    <div *ngFor="let config of configs" class="mb-4">
+      <div [ngClass]="{'bg-green-600 text-white': config._id === selectedConfigId, 'bg-green-100 text-green-800': config._id !== selectedConfigId}"
+           class="rounded-t-lg px-3 py-2 flex items-center justify-between cursor-pointer select-none border border-green-600"
+           (click)="toggleConfig(config._id)">
+        <span class="font-bold uppercase">{{ config.name }}<span *ngIf="config._id === selectedConfigId"> (Configuración en uso)</span></span>
+        <span class="material-icons" style="font-size: 22px;">{{ expandedConfigId === config._id ? 'expand_less' : 'expand_more' }}</span>
+      </div>
+      <div *ngIf="expandedConfigId === config._id" class="border border-green-600 border-t-0 rounded-b-lg bg-white p-3">
+        <div class="mb-2">
+          <span class="font-semibold">Nombre:</span>
+          <ng-container *ngIf="editingConfigId === config._id; else showName">
+            <input class="border rounded px-1 py-0.5 ml-1 w-28" [(ngModel)]="editedConfig.name" />
+          </ng-container>
+          <ng-template #showName>{{ config.name }}</ng-template>
+        </div>
+        <div class="mb-2">
+          <span class="font-semibold">Temperatura:</span>
+          <ng-container *ngIf="editingConfigId === config._id; else showTemp">
+            <input class="border rounded px-1 py-0.5 ml-1 w-16" type="number" [(ngModel)]="editedConfig.temperatureThreshold" /> °C
+          </ng-container>
+          <ng-template #showTemp>{{ config.temperatureThreshold }} °C</ng-template>
+        </div>
+        <div class="mb-2">
+          <span class="font-semibold">Humedad:</span>
+          <ng-container *ngIf="editingConfigId === config._id; else showHum">
+            <input class="border rounded px-1 py-0.5 ml-1 w-16" type="number" [(ngModel)]="editedConfig.humidityThreshold" /> %
+          </ng-container>
+          <ng-template #showHum>{{ config.humidityThreshold }} %</ng-template>
+        </div>
+        <div class="flex gap-2 mt-2">
+          <button class="text-green-700 hover:text-green-900" *ngIf="editingConfigId !== config._id" (click)="editConfig(config, $event)"><span class="material-icons">edit</span></button>
+          <button class="text-red-600 hover:text-red-800" (click)="deleteConfig(config, $event)"><span class="material-icons">delete</span></button>
+          <button class="text-blue-700 hover:text-blue-900" *ngIf="editingConfigId === config._id" (click)="saveConfig(config, $event)"><span class="material-icons">save</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</div>

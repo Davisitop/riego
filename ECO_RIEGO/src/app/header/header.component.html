@@ -1,0 +1,22 @@
+<header class="flex items-center justify-between bg-green-700 text-white p-4 rounded-b-lg shadow-md">
+  <div class="flex items-center gap-4">
+    <img src="assets/logo.png" alt="Eco Riego Logo" class="h-10 w-10 rounded-full shadow" />
+    <span class="text-3xl font-extrabold tracking-wide font-sans" style="letter-spacing:0.2em;">ECO RIEGO</span>
+  </div>
+  <div class="flex items-center gap-4">
+    <ng-container *ngIf="!user; else loggedIn">
+      <button class="bg-white text-green-700 px-6 py-2 rounded-lg font-semibold shadow hover:bg-green-100" (click)="signIn.emit()">Sign In</button>
+      <button class="bg-green-900 px-6 py-2 rounded-lg font-semibold shadow hover:bg-green-800 text-white" (click)="register.emit()">Register</button>
+    </ng-container>
+    <ng-template #loggedIn>
+      <span class="font-semibold text-white">Bienvenido {{ user?.username || user?.name }}</span>
+      <button class="bg-red-600 px-4 py-2 rounded-lg font-semibold shadow hover:bg-red-700 text-white" (click)="onLogout()">Cerrar sesión</button>
+    </ng-template>
+  </div>
+</header>
+
+<div class="w-full">
+  <div class="mt-6 flex items-center justify-center">
+    <span class="text-[11px] tracking-[0.35em] text-gray-500">ECO RIEGO</span>
+  </div>
+</div>
